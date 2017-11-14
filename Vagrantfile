@@ -13,8 +13,8 @@ end
 # http://docs.vagrantup.com/v2/vagrantfile/machine_settings.html
 Vagrant.configure("2") do |config|
   # This setting will download the atlas box at
-  # https://atlas.hashicorp.com/ferventcoder/boxes/win2012r2-x64-nocm
-  config.vm.box = "BasicTheProgram/windows_2016"
+  # https://app.vagrantup.com/BasicTheProgram/windows_2012_r2_virtualbox.box"
+  config.vm.box = "BasicTheProgram/windows_server_2012_r2"
 
   # http://docs.vagrantup.com/v2/providers/configuration.html
   # http://docs.vagrantup.com/v2/virtualbox/configuration.html
