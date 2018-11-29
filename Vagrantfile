@@ -21,6 +21,10 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |v, override|
     # Show the GUI
     v.gui = true
+
+    # https://www.vagrantup.com/docs/virtualbox/configuration.html#default-nic-type
+    v.default_nic_type = "82543GC"
+
     # 4GB RAM
     v.customize ["modifyvm", :id, "--memory", "4096"]
     # 2 CPUs
@@ -35,7 +39,7 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     v.customize ["modifyvm", :id, "--draganddrop", "hosttoguest"]
     # For performance
-    v.customize ["modifyvm", :id, "--usb", "off"]
+    v.customize ["modifyvm", :id, "--usb", "on"]
     # Huge performance gain here
     v.linked_clone = true if Vagrant::VERSION >= '1.8.0'
   end
@@ -104,12 +108,13 @@ Vagrant.configure("2") do |config|
   # Port forward WinRM / RDP
   # Vagrant 1.9.3 - if you run into Errno::EADDRNOTAVAIL (https://github.com/mitchellh/vagrant/issues/8395),
   #  add host_ip: "127.0.0.1" for it to work
-  config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true #, host_ip: "127.0.0.1"
-  config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true #, host_ip: "127.0.0.1"
+  # https://www.vagrantup.com/docs/virtualbox/networking.html#virtualbox-nic-type
+  ##config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true, nic_type: "82543GC"
+  ##config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true, nic_type: "82543GC"
   # Port forward SSH (ssh is forwarded by default in most versions of Vagrant,
   # but be sure). This is not necessary if you are not using SSH, but it doesn't
   # hurt anything to have it
-  config.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true #, host_ip: "127.0.0.1"
+  ##config.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true, nic_type: "82543GC"
 
   # Provisioners - http://docs.vagrantup.com/v2/provisioning/
   # In this specific vagrant usage, we are using the shell provisioner
