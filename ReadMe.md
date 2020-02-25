@@ -6,6 +6,18 @@ When creating packages or testing other parts of Chocolatey, this environment pr
 
 When creating packages, please review https://github.com/chocolatey/choco/wiki/CreatePackages
 
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Setup](#setup)
+- [Running Verification Manually](#running-verification-manually)
+  - [Preparing the Testing Environment](#preparing-the-testing-environment)
+  - [Testing a Package](#testing-a-package)
+  - [Make Changes and Retest](#make-changes-and-retest)
+  - [Tearing Down the Testing Environment](#tearing-down-the-testing-environment)
+- [Differences Between This and Package Verifier Service](#differences-between-this-and-package-verifier-service)
+- [Troubleshooting](#troubleshooting)
+
 ## Requirements
 
 You need a computer with:
@@ -18,8 +30,8 @@ You need a computer with:
 ## Setup
 
 To get started, ensure you have the following installed:
- * Vagrant 1.8.1+ - linked clones is the huge reason here. You can technically use any version of Vagrant 1.3.5+. But you will get the best performance with 1.8.x.
- * Virtualbox 4.3.28+ (5.x may have issues, so try to stay in 4.3.x series)
+ * Vagrant 1.8.1+ - linked clones is the huge reason here. You can technically use any version of Vagrant 1.3.5+. But you will get the best performance with 1.8.x+. It appears you can go up to Vagrant 2.1.5, but may have some issues with 2.2.2 and Windows guests (newer versions may be fine).
+ * Virtualbox 4.3.28+ - 5.2.20 (this flows in the selection of Vagrant - 5.2.22 seems to have some issues but newer versions may work fine)
  * vagrant sahara plugin (`vagrant plugin install sahara`)
 
 **NOTE:** If you decide to run with version 1.8.1 of Vagrant, you are going to need to set the `VAGRANT_SERVER_URL` environment variable as described in this [forum post](https://groups.google.com/forum/#!msg/vagrant-up/H8C68UTkosU/qz4YUmAgBAAJ), otherwise, you will get an HTTP 404 error when attempting to download the base vagrant box used here.
